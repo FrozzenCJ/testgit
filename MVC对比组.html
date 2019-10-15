@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <select name="" id="drinkSelect">
+            <option value="coffee">coffee</option>
+            <option value="milk">milk</option>
+            <option value="juice">juice</option>
+        </select>
+
+        <p id="theColorOfDrink"></p>
+    </div>
+
+    <script type='text/javascript'>
+        //一般写法
+        /* document.getElementById('drinkSelect').onchange = function(){
+            var color;
+            var colorOfDrink = {
+                'coffee' : 'brown',
+                'milk' : 'white',
+                'juice' : 'orange'
+            };
+            color = colorOfDrink[this.value];
+            document.getElementById('theColorOfDrink').innerHTML = color;
+        } */
+    
+        //MVC写法
+        //showDrinkColor is control
+        var showDrinkColor = {
+            start: function(){
+                this.view.start();
+            },
+            set: function(){
+                this.model.setDrink(drinkName);
+            }
+        };
+        
+        //model
+        showDrinkColor.model = {
+            colorOfDrink: {
+                'coffee' : 'brown',
+                'milk' : 'white',
+                'juice' : 'orange'
+            },
+            selectedDrink: null,
+            setDrink: function(drinkName){
+                this.selectedDrink = this.colorOfDrink[this.selectedDrink] ? drinkName : null;
+                this.onchange();
+            },
+            onchange: function(){
+                showDrinkColor.view.update();
+            },
+            getDrinkColor: function(){
+                return this.selectedDrink ? this.colorOfDrink[this.selectedDrink] : "white";
+            }
+        }
+    </script>
+</body>
+</html>

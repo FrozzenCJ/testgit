@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        #box{
+            margin: 10px;
+            height: 100px;
+            width: 100px;
+            background-color: blueviolet;
+            left: 0px;
+            animation: aa 2s linear infinite;
+            position: relative;
+        }
+        @keyframes aa{
+            0% {left: 0px;}
+            50% {left: 200px;}
+            100% {left: 0px;}
+        }
+        .btn{
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div>
+        <div id="box" style="animation-play-state:running;"></div>
+        <input type="button" value="paused" id="btn" class="btn btn-primary" onclick="run()">
+    </div> -->
+    
+    <script>
+        /* function timeout(ms) {
+            return new Promise((resolve,reject)=>{
+                setTimeout(resolve,ms,'done');
+            });
+        }
+
+        timeout(1000).then((value)=>{
+            console.log(value);
+        }) 
+        // 1s 后显示 done
+        
+        
+        */
+
+/*         let promise = new Promise((resolve,reject)=>{
+            console.log('Promise');
+            resolve();
+        });
+
+        promise.then(()=>{
+            console.log('resolved');
+        });
+
+        console.log('Hi!');
+
+        // Promise
+        // Hi!
+        // resolved
+        //上面代码中，Promise 新建后立即执行，所以首先输出的是Promise。然后，then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以resolved最后输出。 */
+        var oDiv = document.querySelector('#box');
+        var oBtn = document.getElementById('btn');
+        var run = ()=>{
+            if(oBtn.getAttribute('value') === 'paused'){
+                oBtn.setAttribute("value","running");
+                oDiv.style.animationPlayState = 'paused';
+                console.log(oBtn.getAttribute('value'));
+            }else{
+                oBtn.setAttribute("value","paused");
+                oDiv.style.animationPlayState = 'running';
+                console.log(oBtn.getAttribute('value'));
+            }
+        }
+        
+    </script>
+    <script>
+            async function async1() {
+              console.log('async1 start');//2
+              await async2();
+              console.log('async1 end');//6
+            }
+            async function async2() {
+              console.log('async2');//3
+            }
+            console.log('script start');//1
+            setTimeout(function() {
+                console.log('setTimeout');//8
+            }, 0);
+            async1();
+            new Promise(function(resolve) {
+                console.log('promise1');//4
+                resolve();
+              }).then(function() {
+                console.log('promise2');//7
+              });
+            console.log('script end');//5
+            </script>   
+</body>
+</html>
